@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  python-app:
+    build: ./python-app
+    container_name: python-container
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql-db
+    environment:
+      - DATABASE_HOST=mysql-db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=rootpassword
+      - DATABASE_NAME=mydb
+    networks:
+      - app-network
+
+  nodejs-app:
+    build: ./nodejs-app
+    container_name: nodejs-container
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql-db
+    environment:
+      - DATABASE_HOST=mysql-db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=rootpassword
+      - DATABASE_NAME=mydb
+    networks:
+      - app-network
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
