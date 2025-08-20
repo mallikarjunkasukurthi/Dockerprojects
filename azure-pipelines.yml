@@ -1,0 +1,29 @@
+trigger:
+  branches:
+    include: [main]
+  paths:
+    include:
+      - src/**
+      - db/**
+      - manifests/**
+      - Dockerfile
+      - azure-pielines.yaml 
+pr:
+  branches:
+    include: [ main]
+      - 
+variables:
+  vmImage: ubuntu-latest
+  buildConfiguration: release
+  ACR:
+  AKS:  
+  imageRepository:
+  dockerfilepath
+  buildcontext
+  webAppname: 
+  AksNameSpace:
+  k8sDeploymentName:
+  publishArtifactName: drop
+pool:
+  vmImage: $(vmimage)
+st
