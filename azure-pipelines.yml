@@ -25,5 +25,4 @@ variables:
   k8sDeploymentName:
   publishArtifactName: drop
 pool:
-  vmImage: $(vmimage)
-st
+            
